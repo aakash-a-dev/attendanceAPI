@@ -3,30 +3,43 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require('fs');
 
-
 const app = express();
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000;
 
-const Atten = require("./Attendance.json")
+const Atten = require("./Attendance.json");
 
 app.get("/", (req,res)=> {
-    res.send("Hello I am Live")
-})
+    res.send("Hello I am Live");
+});
 
 app.get("/attendance", (req, res)=>{
-    res.send(Atten)
-})
+    res.send(Atten);
+});
 
+// app.post("/attendance", (req, res) => {
+//     const { name, time } = req.body;
+//     const newAttendance = { name, time };
+  
+//     // Add the new attendance record to the existing array
+//     Atten.push(newAttendance);
+  
+//     // Write the updated data back to the file
+//     try {
+//       fs.writeFileSync("Attendance.json", JSON.stringify(Atten));
+//       console.log("Attendance updated successfully");
+//       res.status(200).send("Attendance updated successfully");
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).send("Error updating attendance");
+//     }
+// });
 
-
-app.post("/attendance/:name/:time", (req, res) => {
-    const { name, time } = req.params;
+app.post("/attendance", (req, res) => {
+    const { name, time } = req.body;
     const newAttendance = { name, time };
   
     // Add the new attendance record to the existing array
@@ -44,8 +57,7 @@ app.post("/attendance/:name/:time", (req, res) => {
       res.status(500).send("Error updating attendance");
     }
   });
-
   
 app.listen(port, () => {
     console.log(`Listening on ${port}`);
-})
+});
