@@ -1,0 +1,21 @@
+const express = require("express");
+const cors = require("cors");
+const app = express();
+
+app.use(cors());
+
+const port = process.env.PORT || 3000;
+
+const Atten = require("./Attendance.json")
+
+app.get("/", (req,res)=> {
+    res.send("Hello I am Live")
+})
+
+app.get("/attendance", (req, res)=>{
+    res.send(Atten)
+})
+
+app.listen(port, () => {
+    console.log(`Listening on ${port}`);
+})
