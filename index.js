@@ -20,24 +20,6 @@ app.get("/attendance", (req, res)=>{
     res.send(Atten);
 });
 
-// app.post("/attendance", (req, res) => {
-//     const { name, time } = req.body;
-//     const newAttendance = { name, time };
-  
-//     // Add the new attendance record to the existing array
-//     Atten.push(newAttendance);
-  
-//     // Write the updated data back to the file
-//     try {
-//       fs.writeFileSync("Attendance.json", JSON.stringify(Atten));
-//       console.log("Attendance updated successfully");
-//       res.status(200).send("Attendance updated successfully");
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send("Error updating attendance");
-//     }
-// });
-
 app.post("/attendance", (req, res) => {
     const { name, time } = req.body;
     const newAttendance = { name, time };
